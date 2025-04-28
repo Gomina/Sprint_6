@@ -65,3 +65,24 @@ class HomePage:
     def set_text_to_element(self, locator, text):
         element = self.find_element_with_wait(locator)
         element.send_keys(text)
+
+    @allure.step('метод ожидает загрузку элемента с текстом')
+    def waiting_text_in_elements_to_load(self, locator_answer,answer_text):
+        # Дождаться появления элемента с текстом
+        WebDriverWait(self.driver, 10).until(
+            EC.text_to_be_present_in_element(locator_answer, answer_text)
+        )
+
+    @allure.step('метод ожидает загрузку конкретного url')
+    def loading_page_with_url(self, url):
+        WebDriverWait(self.driver, 10).until(
+            EC.url_contains(url)
+        )
+
+    @allure.step('метод дожидается открытия нового окна и переключается на него')
+    def witch_to_new_open_window(self):
+        # дождаться появления нового окна (вкладки)
+        WebDriverWait(self.driver, 10).until(lambda d: len(d.window_handles) > 1)
+        # переключиться на последнее открытое окно (вкладку)
+        new_window_handle = self.driver.window_handles[-1]
+        self.driver.switch_to.window(new_window_handle)

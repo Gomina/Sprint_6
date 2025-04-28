@@ -30,9 +30,7 @@ class TestOrderScooter:
         # нажать на кнопку "Да"
         page.clic_on_element(TLOS.LOCATOR_BUTTON_YES)
         # дождаться появления окна "Заказ оформлен"
-        WebDriverWait(driver, 20).until(
-            EC.text_to_be_present_in_element(TLOS.LOCATOR_WINDOW_ORDER_PLACED, TD.WINDOW_ORDER_PLACED)
-        )
+        page.waiting_text_in_elements_to_load(TLOS.LOCATOR_WINDOW_ORDER_PLACED, TD.WINDOW_ORDER_PLACED)
         # на странице появляется окно с текстом "Заказ оформлен"
         current_text = driver.find_element(*TLOS.LOCATOR_WINDOW_ORDER_PLACED).text
         # проверка наличия заголовка "Заказ оформлен" в тексте окна
@@ -56,9 +54,7 @@ class TestOrderScooter:
         # нажать на кнопку "Да"
         page.clic_on_element(TLOS.LOCATOR_BUTTON_YES)
         # дождаться появления окна "Заказ оформлен"
-        WebDriverWait(driver, 20).until(
-            EC.text_to_be_present_in_element(TLOS.LOCATOR_WINDOW_ORDER_PLACED, TD.WINDOW_ORDER_PLACED)
-        )
+        page.waiting_text_in_elements_to_load(TLOS.LOCATOR_WINDOW_ORDER_PLACED, TD.WINDOW_ORDER_PLACED)
         # на странице появляется окно с текстом "Заказ оформлен"
         current_text = driver.find_element(*TLOS.LOCATOR_WINDOW_ORDER_PLACED).text
         # проверка наличия заголовка "Заказ оформлен" в тексте окна
@@ -82,9 +78,7 @@ class TestOrderScooter:
         # кликнуть "Самокат" страница "Статус заказа"
         page.clic_on_element(TLOS.LOCATOR_SCOOTER_LOGO)
         # дождаться загрузки домашней страницы
-        WebDriverWait(driver, 5).until(
-            EC.url_to_be("https://qa-scooter.praktikum-services.ru/")
-        )
+        page.loading_page_with_url(TestUrl.URL_HOME_PAGE_YANDEX_SCOOTER)
         # проверить, что открылась домашняя страница
         current_url = driver.current_url
         expected_url = TestUrl.URL_HOME_PAGE_YANDEX_SCOOTER
@@ -106,15 +100,10 @@ class TestOrderScooter:
         page.clic_on_element(TLOS.LOCATOR_BUTTON_VIEW_STATUS)
         # кликнуть "Яндекс" страница "Статус заказа"
         page.clic_on_element(TLOS.LOCATOR_YANDEX_LOGO)
-        # дождаться появления нового окна (вкладки)
-        WebDriverWait(driver, 10).until(lambda d: len(d.window_handles) > 1)
-        # переключиться на последнее открытое окно (вкладку)
-        new_window_handle = driver.window_handles[-1]
-        driver.switch_to.window(new_window_handle)
+        # дождаться появления нового окна (вкладки) и переключиться на него
+        page.witch_to_new_open_window()
         # проверить, дождаться чтобы URL "Дзена" прогрузился
-        WebDriverWait(driver, 10).until(
-            EC.url_contains("https://dzen.ru/?yredirect=true")
-        )
+        page.loading_page_with_url(TestUrl.URL_DZEN_PAGE)
         # проверить, что открылась страница Дзен
         current_url = driver.current_url
         expected_url = TestUrl.URL_DZEN_PAGE

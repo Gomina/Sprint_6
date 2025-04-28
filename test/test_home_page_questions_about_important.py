@@ -35,9 +35,7 @@ class TestImportantQuestions:
         # проскролить до элемента и кликнуть его
         page.scroll_to_element(locator_question)
         # дождаться пока текст появится на странице, проверить на соответствие ОР и ФР
-        WebDriverWait(page.driver, 10).until(
-            EC.text_to_be_present_in_element(locator_answer, answer_text)
-        )
+        page.waiting_text_in_elements_to_load(locator_answer, answer_text)
         real_text = page.get_text_from_element(locator_answer)
         expect_text = answer_text
         assert real_text == expect_text
