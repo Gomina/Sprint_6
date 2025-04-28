@@ -17,7 +17,7 @@ from data import TD
 
 class TestOrderScooter:
 
-    # возможно сделать заказ через кнопку "Заказать", расположенную в шапке сайта
+    @allure.title('Возможно сделать заказ через кнопку "Заказать", расположенную в шапке сайта')
     def test_order_button_in_header(self, driver):
         page = OrderPage(driver)
         # кликнуть на кнопку "Заказать" в шапке сайта
@@ -42,7 +42,7 @@ class TestOrderScooter:
 
 
 
-    # возможно сделать заказ через кнопку "Заказать", расположенную в блоке "Как это работает"
+    @allure.title('Возможно сделать заказ через кнопку "Заказать", расположенную в блоке "Как это работает"')
     def test_order_button_in_how_this_work(self, driver):
         page = OrderPage(driver)
         page.open_site()
@@ -65,7 +65,7 @@ class TestOrderScooter:
         expected_text = TD.WINDOW_ORDER_PLACED
         assert expected_text in current_text
 
-    # после успешного заказа, если нажать на логотип «Самоката», осуществляется переход на главную страницу «Самоката»
+    @allure.title('После успешного заказа, если нажать на логотип «Самоката», осуществляется переход на главную страницу «Самоката»')
     def test_click_logo_home_page(self, driver):
         page = OrderPage(driver)
         # кликнуть на кнопку "Заказать" в шапке сайта
@@ -90,7 +90,7 @@ class TestOrderScooter:
         expected_url = TestUrl.URL_HOME_PAGE_YANDEX_SCOOTER
         assert current_url == expected_url
 
-    # после успешного заказа, если нажать на логотип Яндекса, откроется главная страница Дзена
+    @allure.title('После успешного заказа, если нажать на логотип Яндекса, откроется главная страница Дзена')
     def test_click_yandex_open_dzen(self, driver):
         page = OrderPage(driver)
         # кликнуть на кнопку "Заказать" в шапке сайта
