@@ -21,28 +21,28 @@ class HomePage:
         # Создаем экземпляр WebDriverWait с таймаутом 10 секунд
         self.wait = WebDriverWait(self.driver, 10)
 
-    @allure.title('метод открывает сайт на главной странице')
+    @allure.step('метод открывает сайт на главной странице')
     def open_site(self):
         self.driver.get(TestUrl.URL_HOME_PAGE_YANDEX_SCOOTER)
 
-    @allure.title('метод закрывает куки')
+    @allure.step('метод закрывает куки')
     def close_cookies(self):
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(TLHP.LOCATOR_CLOSE_COOKIES)).click()
 
-    @allure.title('метод находить нужный элемент')
+    @allure.step('метод находить нужный элемент')
     def find_element_with_wait(self, locator):
         WebDriverWait(self.driver, 30).until(
             expected_conditions.presence_of_element_located(locator)
         )
         return self.driver.find_element(*locator)
 
-    @allure.title('метод кликает по нужному элементы')
+    @allure.step('метод кликает по нужному элементы')
     def clic_on_element(self, locator):
         element = self.find_element_with_wait(locator)
         element.click()
 
-    @allure.title('метод скроллит до нужного элемента и кликает его')
+    @allure.step('метод скроллит до нужного элемента и кликает его')
     def scroll_to_element(self, locator):
         # Ждём появления элемента на странице
         element = WebDriverWait(self.driver, 20).until(
@@ -56,13 +56,12 @@ class HomePage:
         # Возврат найденного элемента
         return element
 
-
-    @allure.title('метод возвращает текст элементы')
+    @allure.step('метод возвращает текст элементы')
     def get_text_from_element(self, locator):
         element = self.find_element_with_wait(locator)
         return element.text
 
-    @allure.title('метод вставляет текст в элемент')
+    @allure.step('метод вставляет текст в элемент')
     def set_text_to_element(self, locator, text):
         element = self.find_element_with_wait(locator)
         element.send_keys(text)

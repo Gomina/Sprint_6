@@ -18,14 +18,14 @@ from pages.home_page import HomePage
 
 class OrderPage(HomePage):
 
-    @allure.title('метод, открывающий форму заказа')
+    @allure.step('метод, открывающий форму заказа')
     def open_order_form(self, locator):
         # открыть сайт
         self.open_site()
         # найти кнопку для входа в форму заказа и кликнуть по ней
         self.clic_on_element(locator)
 
-    @allure.title('метод, кликающий на поле и вставляющий в поле значение')
+    @allure.step('метод, кликающий на поле и вставляющий в поле значение')
     def fill_in_field(self, locator, data):
         self.clic_on_element(locator)
         self.set_text_to_element(locator,data)

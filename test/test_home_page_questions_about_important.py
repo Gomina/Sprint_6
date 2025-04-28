@@ -27,7 +27,7 @@ class TestImportantQuestions:
             (TLHP.LOCATOR_OUTSIDE_MKAD, TLHP.LOCATOR_OUTSIDE_MKAD_TEXT, QA.OUTSIDE_MKAD)
         ]
     )
-
+    @allure.title('Проверка ответов на вопросы, выпадающего список в разделе «Вопросы о важном» ')
     def test_questions_about_important(self, driver, locator_question, locator_answer, answer_text):
         page = HomePage(driver)
         # открыть сайт
